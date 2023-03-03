@@ -1,12 +1,14 @@
 // New Landing Page
 import { Text, Stack, Center, Image, Button, Box } from "@chakra-ui/react";
 import Mug from "../assets/svgs/mug.svg";
+import ModeButton from "../components/modeButton";
 
 function Home() {
   const lorem =
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus gravida enim purus, eget commodo metus. Phasellus gravida enim purus. ";
   return (
     <Center display="flex" justifyContent="center" w="100vw" h="100vh">
+      <ModeButton />
       <Stack align="center" spacing="5">
         <Image
           objectFit="cover"
