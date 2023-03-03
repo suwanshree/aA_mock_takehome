@@ -1,9 +1,18 @@
-// New Landing Page
-import { Text, Stack, Center, Image, Button, Box } from "@chakra-ui/react";
+import {
+  Text,
+  Stack,
+  Center,
+  Image,
+  Button,
+  useDisclosure,
+} from "@chakra-ui/react";
 import Mug from "../assets/svgs/mug.svg";
+import { CustomModal } from "../components/CustomModal";
 import ModeButton from "../components/modeButton";
 
 function Home() {
+  const { isOpen, onClose, onOpen } = useDisclosure();
+  const modalTitle = "Modal";
   const lorem =
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus gravida enim purus, eget commodo metus. Phasellus gravida enim purus. ";
   return (
@@ -32,8 +41,14 @@ function Home() {
             {lorem}
           </Text>
         </Stack>
-        <Button>Continue</Button>
+        <Button onClick={onOpen}>Continue</Button>
       </Stack>
+      <CustomModal
+        onClose={onClose}
+        isOpen={isOpen}
+        modalTitle={modalTitle}
+        modalDescription={lorem}
+      />
     </Center>
   );
 }
