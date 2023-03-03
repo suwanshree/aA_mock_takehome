@@ -10,7 +10,7 @@ const ModeButton = () => {
       onClick={toggleColorMode}
       pos="absolute"
       top="0"
-      right="0"
+      right={[null, "0"]}
       margin="20px"
     >
       Switch Mode
