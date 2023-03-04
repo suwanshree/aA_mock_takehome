@@ -27,7 +27,7 @@ const Posts = () => {
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus gravida enim purus, eget commodo metus. Phasellus gravida enim purus. ";
   return (
     <Stack
-      w={["100%", "66.66%"]}
+      w={["100%", "75%"]}
       margin={["0px", "50px"]}
       marginBottom={["50px", "0px"]}
     >
@@ -57,6 +57,7 @@ const Posts = () => {
             <PostCard id={post.id} />
           </Fade>
         ))}
+        <Box h="2vh"></Box>
       </Stack>
       <CustomModal
         onClose={onClose}
