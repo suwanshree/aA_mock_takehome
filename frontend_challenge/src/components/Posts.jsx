@@ -24,7 +24,7 @@ const Posts = () => {
       marginBottom={["50px", "0px"]}
     >
       <HStack justifyContent="space-between" margin="10px">
-        <HStack>
+        <HStack gap="20px">
           <Text fontSize="3xl" marginLeft="10px">
             Posts
           </Text>

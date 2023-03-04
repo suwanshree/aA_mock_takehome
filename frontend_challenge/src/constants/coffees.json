@@ -1,0 +1,23 @@
+[
+    {
+        "id": "1",
+        "name": "Black",
+        "year": "1671",
+        "caffineContent": "4.45",
+        "caffinePercentage": "40.26"
+    },
+    {
+        "id": "2",
+        "name": "Espresso",
+        "year": "1906",
+        "caffineContent": "2.15",
+        "caffinePercentage": "30.39"
+    },
+    {
+        "id": "3",
+        "name": "Latte",
+        "year": "1950",
+        "caffineContent": "3.47",
+        "caffinePercentage": "50.10"
+    }
+]

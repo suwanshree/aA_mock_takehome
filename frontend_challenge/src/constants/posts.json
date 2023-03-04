@@ -1,0 +1,23 @@
+[
+    {
+        "id": "1",
+        "title": "Amazing Coffee A",
+        "coffee": "1",
+        "text": "This was an amazing coffee!",
+        "rating": "5.00"
+    },
+    {
+        "id": "2",
+        "title": "Amazing Coffee B",
+        "coffee": "2",
+        "text": "This was an amazing coffee!",
+        "rating": "4.00"
+    },
+    {
+        "id": "3",
+        "title": "Amazing Coffee C",
+        "coffee": "3",
+        "text": "This was an amazing coffee!",
+        "rating": "4.00"
+    }
+]
