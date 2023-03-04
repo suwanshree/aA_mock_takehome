@@ -6,15 +6,23 @@ import {
   Button,
   Divider,
   Box,
+  Fade,
   Select,
   useColorMode,
 } from "@chakra-ui/react";
+import { useEffect } from "react";
 import { CustomModal } from "../components/CustomModal";
+import { usePostStore } from "../store";
+import PostCard from "./PostCard";
 
 const Posts = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   const { colorMode } = useColorMode();
   const modalTitle = "Modal";
+  const { postList, loadPosts } = usePostStore();
+  useEffect(() => {
+    loadPosts();
+  }, []);
   const lorem =
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus gravida enim purus, eget commodo metus. Phasellus gravida enim purus. ";
   return (
@@ -43,6 +51,13 @@ const Posts = () => {
         borderColor={colorMode === "light" ? "brown" : "cyan"}
         size="100"
       />
+      <Stack display="flex" overflow="auto" paddingTop="20px">
+        {postList?.map((post, i) => (
+          <Fade in key={i}>
+            <PostCard id={post.id} />
+          </Fade>
+        ))}
+      </Stack>
       <CustomModal
         onClose={onClose}
         isOpen={isOpen}

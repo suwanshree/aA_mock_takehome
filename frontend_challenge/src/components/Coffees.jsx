@@ -21,7 +21,6 @@ const Coffees = () => {
   useEffect(() => {
     loadCoffees();
   }, []);
-  console.log(coffeeList);
   const lorem =
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus gravida enim purus, eget commodo metus. Phasellus gravida enim purus. ";
   return (

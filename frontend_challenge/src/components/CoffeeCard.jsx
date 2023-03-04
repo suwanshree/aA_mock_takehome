@@ -13,7 +13,7 @@ import whiteMug from "../assets/svgs/whiteMug.svg";
 const CoffeeCard = ({ id }) => {
   const { coffeeList } = useCoffeeStore();
   const { colorMode } = useColorMode();
-  const coffee = coffeeList.find((coffee) => coffee.id === id);
+  const coffee = coffeeList.find((c) => c.id === id);
   return (
     <Stack padding="20px">
       <HStack display="flex" alignItems="center" padding="20px">

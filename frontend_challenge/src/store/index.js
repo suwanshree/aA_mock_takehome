@@ -1,6 +1,7 @@
 import create from "zustand";
 import { persist } from "zustand/middleware";
 import coffees from "../constants/coffees.json";
+import posts from "../constants/posts.json";
 
 let coffeeStore = (set) => ({
   coffeeList: [],
@@ -9,9 +10,18 @@ let coffeeStore = (set) => ({
   },
 });
 
+let postStore = (set) => ({
+  postList: [],
+  loadPosts: () => {
+    set(() => ({ postList: posts }));
+  },
+});
+
 coffeeStore = persist(coffeeStore, { name: "coffee" });
+postStore = persist(postStore, { name: "post" });
 
 export const useCoffeeStore = create(coffeeStore);
+export const usePostStore = create(postStore);
 
 //   EXAMPLES --->
 //   POST jsons:
