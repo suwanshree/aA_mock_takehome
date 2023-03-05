@@ -14,13 +14,11 @@ import CoffeeCard from "./CoffeeCard";
 
 const Coffees = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
-  const modalTitle = "Modal";
   const { coffeeList, loadCoffees } = useCoffeeStore();
   useEffect(() => {
     loadCoffees();
   }, []);
-  const lorem =
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus gravida enim purus, eget commodo metus. Phasellus gravida enim purus. ";
+  const onSubmit = () => {};
   return (
     <Stack
       w={["100%", "25%"]}
@@ -43,8 +41,8 @@ const Coffees = () => {
       <CustomModal
         onClose={onClose}
         isOpen={isOpen}
-        modalTitle={modalTitle}
-        modalDescription={lorem}
+        variant="coffee"
+        onSubmit={onSubmit}
       />
     </Stack>
   );

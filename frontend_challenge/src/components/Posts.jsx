@@ -7,24 +7,24 @@ import {
   Divider,
   Box,
   Fade,
+  Image,
   Select,
   useColorMode,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { CustomModal } from "../components/CustomModal";
 import { usePostStore } from "../store";
+import hotCoffee from "../assets/gifs/hot-coffee.gif";
 import PostCard from "./PostCard";
 
 const Posts = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   const { colorMode } = useColorMode();
-  const modalTitle = "Modal";
   const { postList, loadPosts } = usePostStore();
   useEffect(() => {
     loadPosts();
   }, []);
-  const lorem =
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus gravida enim purus, eget commodo metus. Phasellus gravida enim purus. ";
+  const onSubmit = () => {};
   return (
     <Stack
       w={["100%", "75%"]}
@@ -33,9 +33,8 @@ const Posts = () => {
     >
       <HStack justifyContent="space-between" margin="10px">
         <HStack gap="20px">
-          <Text fontSize="3xl" marginLeft="10px">
-            Posts
-          </Text>
+          <Image src={hotCoffee} alt="Coffee Gif" w="50px" marginLeft="10px" />
+          <Text fontSize="5xl">Posts</Text>
           <Button onClick={onOpen}>New Post</Button>
         </HStack>
         <Box>
@@ -59,12 +58,7 @@ const Posts = () => {
         ))}
         <Box h="2vh"></Box>
       </Stack>
-      <CustomModal
-        onClose={onClose}
-        isOpen={isOpen}
-        modalTitle={modalTitle}
-        modalDescription={lorem}
-      />
+      <CustomModal onClose={onClose} isOpen={isOpen} onSubmit={onSubmit} />
     </Stack>
   );
 };

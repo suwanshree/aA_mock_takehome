@@ -1,12 +1,21 @@
 import { Stack, Text, Image, useColorMode, Divider } from "@chakra-ui/react";
 import { usePostStore } from "../store";
-import mug from "../assets/svgs/mug.svg";
-import whiteMug from "../assets/svgs/whiteMug.svg";
+import ReactStars from "react-rating-stars-component";
+import { useState, useEffect } from "react";
 
 const PostCard = ({ id }) => {
   const { postList } = usePostStore();
   const { colorMode } = useColorMode();
   const post = postList.find((p) => p.id === id);
+  const ratingStars = {
+    size: 30,
+    count: 5,
+    isHalf: false,
+    value: post?.rating,
+    color: "gray",
+    edit: false,
+    activeColor: null,
+  };
   return (
     <Stack display="flex" alignItems="center" padding="20px" textAlign="center">
       <Text
@@ -16,13 +25,7 @@ const PostCard = ({ id }) => {
       >
         {post.title}
       </Text>
-      <Text
-        paddingRight={["0px", "30px"]}
-        paddingLeft={["0px", "30px"]}
-        fontSize="2xl"
-      >
-        {post.rating}
-      </Text>
+      <ReactStars {...ratingStars} />
       <Text
         paddingRight={["0px", "30px"]}
         paddingLeft={["0px", "30px"]}
