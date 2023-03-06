@@ -57,13 +57,6 @@ router.post(
   coffeeValidators,
   asyncHandler(async (req, res) => {
     const { name, year, caffineContent, caffinePercentage } = req.body;
-    console.log(
-      "==========================",
-      name,
-      year,
-      caffineContent,
-      caffinePercentage
-    );
     const coffee = await Coffee.writeCoffee({
       name,
       year,
@@ -84,7 +77,7 @@ router.delete(
     const coffeeId = parseInt(req.params.id, 10);
     const coffee = await Coffee.findByPk(coffeeId);
     await coffee.destroy();
-    return res.json({});
+    return res.json({ status: "Deletion Success!" });
   })
 );
 

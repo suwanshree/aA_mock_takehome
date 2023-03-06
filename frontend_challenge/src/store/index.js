@@ -37,10 +37,10 @@ let coffeeStore = (set) => ({
       console.error(error);
     }
   },
-  deleteCoffee: async (postId) => {
+  deleteCoffee: async (id) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/coffee/delete/${postId}`,
+        `http://localhost:5000/coffee/delete/${id}`,
         {
           method: "DELETE",
           headers: {
@@ -48,10 +48,12 @@ let coffeeStore = (set) => ({
           },
         }
       );
-      const { id } = await response.json();
-      set((state) => ({
-        postList: state.postList.filter((post) => post.id !== id),
-      }));
+      const { status } = await response.json();
+      if (status) {
+        set((state) => ({
+          coffeeList: state.coffeeList.filter((coffee) => coffee.id !== id),
+        }));
+      }
     } catch (error) {
       console.error(error);
     }

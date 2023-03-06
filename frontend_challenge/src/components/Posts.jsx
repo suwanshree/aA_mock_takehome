@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { CustomModal } from "../components/CustomModal";
-import { usePostStore } from "../store";
+import { usePostStore, useCoffeeStore } from "../store";
 import hotCoffee from "../assets/gifs/hot-coffee.gif";
 import PostCard from "./PostCard";
 
@@ -21,9 +21,10 @@ const Posts = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   const { colorMode } = useColorMode();
   const { postList, loadPosts } = usePostStore();
+  const { coffeeList } = useCoffeeStore();
   useEffect(() => {
     loadPosts();
-  }, []);
+  }, [coffeeList]);
   const onSubmit = () => {};
   return (
     <Stack

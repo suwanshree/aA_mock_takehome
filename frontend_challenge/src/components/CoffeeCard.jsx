@@ -14,9 +14,13 @@ import whiteMug from "../assets/svgs/whiteMug.svg";
 import { CloseIcon } from "@chakra-ui/icons";
 
 const CoffeeCard = ({ id }) => {
-  const { coffeeList } = useCoffeeStore();
+  const { coffeeList, deleteCoffee } = useCoffeeStore();
   const { colorMode } = useColorMode();
   const coffee = coffeeList.find((c) => c.id === id);
+  const handleDelete = (event) => {
+    event.preventDefault();
+    deleteCoffee(coffee.id);
+  };
   return (
     <Box
       position="relative"
@@ -53,7 +57,7 @@ const CoffeeCard = ({ id }) => {
         aria-label="Remove Coffee"
         icon={<CloseIcon />}
         visibility="hidden"
-        onClick={() => console.log("Clicked!")}
+        onClick={handleDelete}
       />
     </Box>
   );
