@@ -23,8 +23,6 @@ let coffeeStore = (set) => ({
       caffinePercentage: caffinePercentage,
       caffineContent: caffineContent,
     };
-    console.log("NEW", newCoffee);
-    console.log("NEW", formattedNewCoffee);
     try {
       const response = await axios.post(
         "http://localhost:5000/coffee/create",
@@ -80,35 +78,30 @@ let postStore = (set) => ({
     }
   },
   createPost: async (newPost) => {
+    console.log("NEW", newPost);
     try {
-      const response = await fetch("http://localhost:5000/post", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newPost),
-      });
-      const data = await response.json();
+      const response = await axios.post("http://localhost:5000/post", newPost);
+      const data = response.data;
+      console.log(data);
       set((state) => ({ postList: [...state.postList, data.data] }));
     } catch (error) {
       console.error(error);
     }
   },
-  deletePost: async (postId) => {
+  deletePost: async (id) => {
     try {
-      const response = await fetch(
-        `http://localhost:5000/post/delete/${postId}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      const { id } = await response.json();
-      set((state) => ({
-        postList: state.postList.filter((post) => post.id !== id),
-      }));
+      const response = await fetch(`http://localhost:5000/post/delete/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const { status } = await response.json();
+      if (status) {
+        set((state) => ({
+          postList: state.postList.filter((post) => post.id !== id),
+        }));
+      }
     } catch (error) {
       console.error(error);
     }
@@ -120,18 +113,3 @@ postStore = persist(postStore, { name: "post" });
 
 export const useCoffeeStore = create(coffeeStore);
 export const usePostStore = create(postStore);
-
-//   EXAMPLES --->
-//   POST jsons:
-//   {
-//     name: "Coffee",
-//     year: "1982",
-//     caffineContent: "10.45",
-//     caffinePercentage: "50.76"
-//   }
-//   {
-//     title: "Amazing Coffee",
-//     coffee: "1", // refer to coffee
-//     text: "This was an amazing coffee!",
-//     rating: "5.00"
-//   }

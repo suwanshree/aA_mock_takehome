@@ -100,7 +100,7 @@ router.delete(
     const postId = parseInt(req.params.id, 10);
     const post = await Post.findByPk(postId);
     await post.destroy({ where: { id: postId } });
-    return res.json({ id: postId });
+    return res.json({ status: "Deletion Success!" });
   })
 );
 

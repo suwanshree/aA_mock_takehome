@@ -15,11 +15,12 @@ import {
   Select,
   Textarea,
 } from "@chakra-ui/react";
-import { useCoffeeStore } from "../store";
+import { useCoffeeStore, usePostStore } from "../store";
 
 export const CustomModal = ({ onClose, isOpen, onSubmit, variant }) => {
   const { colorMode } = useColorMode();
   const { createCoffee } = useCoffeeStore();
+  const { createPost } = usePostStore();
 
   const handleCoffeeSubmit = (event) => {
     event.preventDefault();
@@ -33,6 +34,16 @@ export const CustomModal = ({ onClose, isOpen, onSubmit, variant }) => {
 
   const handlePostSubmit = (event) => {
     event.preventDefault();
+    const formTitle = event.target.elements.title.value;
+    const formRating = event.target.elements.rating.value;
+    const formText = event.target.elements.text.value;
+    const formCoffee = 1;
+    createPost({
+      title: formTitle,
+      rating: formRating,
+      text: formText,
+      coffee: formCoffee,
+    });
     onClose();
     onSubmit();
   };

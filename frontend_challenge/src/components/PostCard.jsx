@@ -1,14 +1,26 @@
-import { Stack, Text, Image, useColorMode, Divider } from "@chakra-ui/react";
+import {
+  Stack,
+  Text,
+  Image,
+  useColorMode,
+  Divider,
+  IconButton,
+} from "@chakra-ui/react";
 import { usePostStore, useCoffeeStore } from "../store";
 import ReactStars from "react-rating-stars-component";
 import { useState, useEffect } from "react";
+import { CloseIcon } from "@chakra-ui/icons";
 
 const PostCard = ({ id }) => {
-  const { postList } = usePostStore();
+  const { postList, deletePost } = usePostStore();
   const { coffeeList } = useCoffeeStore();
   const { colorMode } = useColorMode();
   const post = postList.find((p) => p.id === id);
   const postCoffee = coffeeList.find((c) => c.id === post.coffee);
+  const handleDelete = (event) => {
+    event.preventDefault();
+    deletePost(post.id);
+  };
   const ratingStars = {
     size: 30,
     count: 5,
@@ -20,7 +32,20 @@ const PostCard = ({ id }) => {
   };
   console.log(post);
   return (
-    <Stack display="flex" alignItems="center" padding="10px" textAlign="center">
+    <Stack
+      display="flex"
+      alignItems="center"
+      textAlign="center"
+      position="relative"
+      _hover={{
+        boxShadow: `0px 1px 1px rgba(${
+          colorMode === "light" ? "121, 71, 38" : "0, 188, 212"
+        }, 0.40)`,
+        "& > button": {
+          visibility: "visible",
+        },
+      }}
+    >
       <Text
         paddingRight={["0px", "30px"]}
         paddingLeft={["0px", "30px"]}
@@ -45,6 +70,15 @@ const PostCard = ({ id }) => {
       >
         {postCoffee.name} - {Math.floor(postCoffee.caffinePercentage)} mg per oz
       </Text>
+      <IconButton
+        position="absolute"
+        top="5px"
+        right="5px"
+        aria-label="Remove Coffee"
+        icon={<CloseIcon />}
+        visibility="hidden"
+        onClick={handleDelete}
+      />
       <Divider
         borderColor={colorMode === "light" ? "brown" : "cyan"}
         size="100"
