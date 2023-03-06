@@ -11,7 +11,7 @@ import {
   Select,
   useColorMode,
 } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { CustomModal } from "../components/CustomModal";
 import { usePostStore, useCoffeeStore } from "../store";
 import hotCoffee from "../assets/gifs/hot-coffee.gif";
@@ -20,11 +20,12 @@ import PostCard from "./PostCard";
 const Posts = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   const { colorMode } = useColorMode();
+  const [order, setOrder] = useState("ASC");
   const { postList, loadPosts } = usePostStore();
   const { coffeeList } = useCoffeeStore();
   useEffect(() => {
-    loadPosts();
-  }, [coffeeList]);
+    loadPosts(order);
+  }, [coffeeList, order, loadPosts]);
   const onSubmit = () => {};
   return (
     <Stack
@@ -41,11 +42,11 @@ const Posts = () => {
         <Box>
           <Select
             variant="outline"
-            // onChange={onSelect}
-            // value={selectedSort}
+            onChange={(event) => setOrder(event.target.value)}
+            value={order}
           >
-            <option value="columbian">asc</option>
-            <option value="ethiopian">desc</option>
+            <option value="ASC">asc</option>
+            <option value="DESC">desc</option>
           </Select>
         </Box>
       </HStack>

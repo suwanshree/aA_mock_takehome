@@ -19,7 +19,7 @@ import { useCoffeeStore, usePostStore } from "../store";
 
 export const CustomModal = ({ onClose, isOpen, onSubmit, variant }) => {
   const { colorMode } = useColorMode();
-  const { createCoffee } = useCoffeeStore();
+  const { coffeeList, createCoffee } = useCoffeeStore();
   const { createPost } = usePostStore();
 
   const handleCoffeeSubmit = (event) => {
@@ -37,7 +37,7 @@ export const CustomModal = ({ onClose, isOpen, onSubmit, variant }) => {
     const formTitle = event.target.elements.title.value;
     const formRating = event.target.elements.rating.value;
     const formText = event.target.elements.text.value;
-    const formCoffee = 1;
+    const formCoffee = event.target.elements.coffee.value;
     createPost({
       title: formTitle,
       rating: formRating,
@@ -153,9 +153,11 @@ export const CustomModal = ({ onClose, isOpen, onSubmit, variant }) => {
             <FormControl display="flex" alignItems="center" marginTop="20px">
               <FormLabel>Coffee:</FormLabel>
               <Select name="coffee" width="200px" marginLeft="34px">
-                <option value="1">Black</option>
-                <option value="2">Espresso</option>
-                <option value="2">Latte</option>
+                {coffeeList.map((coffee) => (
+                  <option key={coffee.id} value={coffee.id}>
+                    {coffee.name}
+                  </option>
+                ))}
               </Select>
             </FormControl>
             <FormControl>

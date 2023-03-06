@@ -29,7 +29,6 @@ let coffeeStore = (set) => ({
         formattedNewCoffee
       );
       const data = response.data;
-      console.log(data);
       set((state) => ({ coffeeList: [...state.coffeeList, data.data] }));
     } catch (error) {
       console.error(error);
@@ -78,11 +77,9 @@ let postStore = (set) => ({
     }
   },
   createPost: async (newPost) => {
-    console.log("NEW", newPost);
     try {
       const response = await axios.post("http://localhost:5000/post", newPost);
       const data = response.data;
-      console.log(data);
       set((state) => ({ postList: [...state.postList, data.data] }));
     } catch (error) {
       console.error(error);

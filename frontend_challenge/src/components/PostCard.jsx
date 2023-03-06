@@ -8,7 +8,6 @@ import {
 } from "@chakra-ui/react";
 import { usePostStore, useCoffeeStore } from "../store";
 import ReactStars from "react-rating-stars-component";
-import { useState, useEffect } from "react";
 import { CloseIcon } from "@chakra-ui/icons";
 
 const PostCard = ({ id }) => {
@@ -30,7 +29,6 @@ const PostCard = ({ id }) => {
     edit: false,
     activeColor: null,
   };
-  console.log(post);
   return (
     <Stack
       display="flex"
@@ -68,7 +66,8 @@ const PostCard = ({ id }) => {
         fontSize="xl"
         fontWeight="bold"
       >
-        {postCoffee.name} - {Math.floor(postCoffee.caffinePercentage)} mg per oz
+        {postCoffee?.name} - {Math.floor(postCoffee?.caffinePercentage)} mg per
+        oz
       </Text>
       <IconButton
         position="absolute"
