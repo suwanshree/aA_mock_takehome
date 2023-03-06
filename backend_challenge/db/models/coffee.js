@@ -30,16 +30,16 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   Coffee.writeCoffee = async function ({
-    ownerId,
-    title,
-    imageUrl,
-    description,
+    name,
+    year,
+    caffineContent,
+    caffinePercentage,
   }) {
     const coffee = await Coffee.create({
-      ownerId,
-      title,
-      imageUrl,
-      description,
+      name,
+      year,
+      caffineContent,
+      caffinePercentage,
     });
     return coffee;
   };

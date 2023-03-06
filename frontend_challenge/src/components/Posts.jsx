@@ -39,11 +39,13 @@ const Posts = () => {
         </HStack>
         <Box>
           <Select
-            placeholder="Sort"
             variant="outline"
             // onChange={onSelect}
             // value={selectedSort}
-          ></Select>
+          >
+            <option value="columbian">asc</option>
+            <option value="ethiopian">desc</option>
+          </Select>
         </Box>
       </HStack>
       <Divider

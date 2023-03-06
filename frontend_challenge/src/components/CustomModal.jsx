@@ -15,16 +15,18 @@ import {
   Select,
   Textarea,
 } from "@chakra-ui/react";
+import { useCoffeeStore } from "../store";
 
 export const CustomModal = ({ onClose, isOpen, onSubmit, variant }) => {
   const { colorMode } = useColorMode();
+  const { createCoffee } = useCoffeeStore();
 
   const handleCoffeeSubmit = (event) => {
     event.preventDefault();
-    const name = event.target.elements.name.value;
-    const year = event.target.elements.year.value;
-    const caffeine = event.target.elements.caffeine.value;
-    console.log(`New coffee: ${name} (${year}), caffeine: ${caffeine}`);
+    const formName = event.target.elements.name.value;
+    const formYear = event.target.elements.year.value;
+    const formCaffine = event.target.elements.caffine.value;
+    createCoffee({ name: formName, year: formYear, caffine: formCaffine });
     onClose();
     onSubmit();
   };
@@ -77,7 +79,7 @@ export const CustomModal = ({ onClose, isOpen, onSubmit, variant }) => {
               <FormLabel>Caffine:</FormLabel>
               <Input
                 type="number"
-                name="caffeine"
+                name="caffine"
                 width="250px"
                 marginLeft="35px"
               />
@@ -140,9 +142,9 @@ export const CustomModal = ({ onClose, isOpen, onSubmit, variant }) => {
             <FormControl display="flex" alignItems="center" marginTop="20px">
               <FormLabel>Coffee:</FormLabel>
               <Select name="coffee" width="200px" marginLeft="34px">
-                <option value="columbian">Columbian</option>
-                <option value="ethiopian">Ethiopian</option>
-                <option value="guatemalan">Guatemalan</option>
+                <option value="1">Black</option>
+                <option value="2">Espresso</option>
+                <option value="2">Latte</option>
               </Select>
             </FormControl>
             <FormControl>

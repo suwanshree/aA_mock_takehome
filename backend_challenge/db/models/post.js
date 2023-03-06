@@ -23,12 +23,12 @@ module.exports = (sequelize, DataTypes) => {
     Post.belongsTo(models.Coffee, { foreignKey: "coffee" });
   };
 
-  Post.writePost = async function ({ userId, productId, title, review }) {
+  Post.writePost = async function ({ title, coffee, text, rating }) {
     const newPost = await Post.create({
-      userId,
-      productId,
       title,
-      review,
+      coffee,
+      text,
+      rating,
     });
     return newPost;
   };

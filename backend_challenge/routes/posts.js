@@ -1,6 +1,6 @@
 const express = require("express");
 const { Post } = require("../db/models");
-const { csrfProtection, asyncHandler } = require("../utils/async");
+const { asyncHandler } = require("../utils/async");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../utils/validation");
 
@@ -34,9 +34,32 @@ router.get(
 router.get(
   "/",
   asyncHandler(async (req, res) => {
+    const order = req.query.order === "DESC" ? "DESC" : "ASC";
     const allPosts = await Post.findAll({
-      order: [["createdAt", "DESC"]],
+      order: [["createdAt", order]],
     });
+    return res.json(allPosts);
+  })
+);
+
+// return all posts with coffee having a matching id
+router.get(
+  "/coffee",
+  asyncHandler(async (req, res) => {
+    const { id } = req.query;
+    let allPosts;
+    if (id) {
+      allPosts = await Post.findAll({
+        where: {
+          coffee: id,
+        },
+        order: [["createdAt", "DESC"]],
+      });
+    } else {
+      return res
+        .status(400)
+        .json({ error: "Please provide a valid id or name" });
+    }
     return res.json(allPosts);
   })
 );
@@ -44,7 +67,6 @@ router.get(
 // Returns single post with matching id
 router.get(
   "/:id(\\d+)",
-  csrfProtection,
   asyncHandler(async (req, res) => {
     const postId = parseInt(req.params.id, 10);
     const post = await Post.findByPk(postId);
@@ -55,7 +77,6 @@ router.get(
 // Creates a new post and returns it
 router.post(
   "/",
-  csrfProtection,
   postValidators,
   asyncHandler(async (req, res) => {
     const { title, coffee, text, rating } = req.body;
@@ -68,7 +89,6 @@ router.post(
     const data = newPost.dataValues;
     return res.json({
       data,
-      csrfToken: req.csrfToken(),
     });
   })
 );
@@ -76,7 +96,6 @@ router.post(
 // Destroys a post in the database - returns if deletion was a success
 router.delete(
   "/delete/:id(\\d+)",
-  csrfProtection,
   asyncHandler(async (req, res) => {
     const postId = parseInt(req.params.id, 10);
     const post = await Post.findByPk(postId);

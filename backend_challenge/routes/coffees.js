@@ -1,6 +1,6 @@
 const express = require("express");
 const { Coffee } = require("../db/models");
-const { csrfProtection, asyncHandler } = require("../utils/async");
+const { asyncHandler } = require("../utils/async");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../utils/validation");
 
@@ -35,7 +35,7 @@ router.get(
   "/",
   asyncHandler(async (req, res) => {
     const allCoffees = await Coffee.findAll({
-      order: [["createdAt", "DESC"]],
+      order: [["name", "ASC"]],
     });
     return res.json(allCoffees);
   })
@@ -44,7 +44,6 @@ router.get(
 // Returns single coffee with matching id
 router.get(
   "/:id(\\d+)",
-  csrfProtection,
   asyncHandler(async (req, res) => {
     const coffeeId = parseInt(req.params.id, 10);
     const coffee = await Coffee.findByPk(coffeeId);
@@ -55,10 +54,16 @@ router.get(
 // Create new Coffee route
 router.post(
   "/create",
-  csrfProtection,
   coffeeValidators,
   asyncHandler(async (req, res) => {
     const { name, year, caffineContent, caffinePercentage } = req.body;
+    console.log(
+      "==========================",
+      name,
+      year,
+      caffineContent,
+      caffinePercentage
+    );
     const coffee = await Coffee.writeCoffee({
       name,
       year,
@@ -68,7 +73,6 @@ router.post(
     const data = coffee.dataValues;
     return res.json({
       data,
-      csrfToken: req.csrfToken(),
     });
   })
 );
