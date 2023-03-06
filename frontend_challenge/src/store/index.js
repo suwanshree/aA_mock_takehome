@@ -1,19 +1,29 @@
 import create from "zustand";
 import { persist } from "zustand/middleware";
-import coffees from "../constants/coffees.json";
-import posts from "../constants/posts.json";
 
 let coffeeStore = (set) => ({
   coffeeList: [],
-  loadCoffees: () => {
-    set(() => ({ coffeeList: coffees }));
+  loadCoffees: async () => {
+    try {
+      const response = await fetch("http://localhost:5000/coffee");
+      const coffees = await response.json();
+      set(() => ({ coffeeList: coffees }));
+    } catch (error) {
+      console.error(error);
+    }
   },
 });
 
 let postStore = (set) => ({
   postList: [],
-  loadPosts: () => {
-    set(() => ({ postList: posts }));
+  loadPosts: async () => {
+    try {
+      const response = await fetch("http://localhost:5000/post");
+      const posts = await response.json();
+      set(() => ({ postList: posts }));
+    } catch (error) {
+      console.error(error);
+    }
   },
 });
 
