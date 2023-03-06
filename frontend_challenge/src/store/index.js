@@ -16,7 +16,7 @@ let coffeeStore = (set) => ({
   createCoffee: async (newCoffee) => {
     const { name, year, caffine } = newCoffee;
     const caffineContent = caffine;
-    const caffinePercentage = caffine / 12;
+    const caffinePercentage = caffine / 8; // based on 8 oz serving size
     const formattedNewCoffee = {
       name: name,
       year: year,
