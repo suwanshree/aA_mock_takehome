@@ -61,7 +61,7 @@ Please run this project locally in development as production build has not been 
 
     -       npm run dev
 
-10. You can use the Demo user or create an account to begin using _Cosmic-Hunt_.
+10. You can start using the application and perform CRUD operations.
 
 ## Features
 
