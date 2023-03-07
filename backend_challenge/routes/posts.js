@@ -42,7 +42,7 @@ router.get(
   })
 );
 
-// return all posts with coffee having a matching id
+// return all posts with coffee having a matching id sorted by date
 router.get(
   "/coffee",
   asyncHandler(async (req, res) => {
@@ -53,7 +53,7 @@ router.get(
         where: {
           coffee: id,
         },
-        order: [["createdAt", "DESC"]],
+        order: [["createdAt", "ASC"]],
       });
     } else {
       return res

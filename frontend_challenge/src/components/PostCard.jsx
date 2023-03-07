@@ -1,7 +1,6 @@
 import {
   Stack,
   Text,
-  Image,
   useColorMode,
   Divider,
   IconButton,
@@ -11,11 +10,11 @@ import ReactStars from "react-rating-stars-component";
 import { CloseIcon } from "@chakra-ui/icons";
 
 const PostCard = ({ id }) => {
-  const { postList, deletePost } = usePostStore();
+  const { postList, isCoffeeSelected, deletePost } = usePostStore();
   const { coffeeList } = useCoffeeStore();
   const { colorMode } = useColorMode();
-  const post = postList.find((p) => p.id === id);
-  const postCoffee = coffeeList.find((c) => c.id === post.coffee);
+  const post = postList?.find((p) => p.id === id);
+  const postCoffee = coffeeList?.find((c) => c.id === post.coffee);
   const handleDelete = (event) => {
     event.preventDefault();
     deletePost(post.id);
@@ -69,15 +68,17 @@ const PostCard = ({ id }) => {
         {postCoffee?.name} - {Math.floor(postCoffee?.caffinePercentage)} mg per
         oz
       </Text>
-      <IconButton
-        position="absolute"
-        top="5px"
-        right="5px"
-        aria-label="Remove Coffee"
-        icon={<CloseIcon />}
-        visibility="hidden"
-        onClick={handleDelete}
-      />
+      {isCoffeeSelected ? null : (
+        <IconButton
+          position="absolute"
+          top="5px"
+          right="5px"
+          aria-label="Remove Coffee"
+          icon={<CloseIcon />}
+          visibility="hidden"
+          onClick={handleDelete}
+        />
+      )}
       <Divider
         borderColor={colorMode === "light" ? "brown" : "cyan"}
         size="100"

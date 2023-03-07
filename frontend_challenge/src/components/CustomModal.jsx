@@ -14,13 +14,28 @@ import {
   Divider,
   Select,
   Textarea,
+  Box,
 } from "@chakra-ui/react";
+import { useState } from "react";
+import ReactStars from "react-rating-stars-component";
 import { useCoffeeStore, usePostStore } from "../store";
 
 export const CustomModal = ({ onClose, isOpen, onSubmit, variant }) => {
   const { colorMode } = useColorMode();
   const { coffeeList, createCoffee } = useCoffeeStore();
   const { createPost } = usePostStore();
+  const [rating, setRating] = useState(5);
+
+  const ratingStars = {
+    size: 30,
+    count: 5,
+    isHalf: false,
+    value: 5,
+    color: "gray",
+    edit: true,
+    activeColor: null,
+    onChange: (e) => setRating(e),
+  };
 
   const handleCoffeeSubmit = (event) => {
     event.preventDefault();
@@ -35,7 +50,7 @@ export const CustomModal = ({ onClose, isOpen, onSubmit, variant }) => {
   const handlePostSubmit = (event) => {
     event.preventDefault();
     const formTitle = event.target.elements.title.value;
-    const formRating = event.target.elements.rating.value;
+    const formRating = rating;
     const formText = event.target.elements.text.value;
     const formCoffee = event.target.elements.coffee.value;
     createPost({
@@ -131,7 +146,6 @@ export const CustomModal = ({ onClose, isOpen, onSubmit, variant }) => {
           borderColor={colorMode === "light" ? "brown" : "cyan"}
           size="100"
         />
-
         <form onSubmit={handlePostSubmit}>
           <ModalBody>
             <FormControl marginTop="20px">
@@ -142,13 +156,11 @@ export const CustomModal = ({ onClose, isOpen, onSubmit, variant }) => {
                 placeholder="Title"
               />
             </FormControl>
-            <FormControl marginTop="20px">
-              <Input
-                type="number"
-                name="rating"
-                width="100%"
-                placeholder="Rating"
-              />
+            <FormControl marginTop="20px" display="flex" alignItems="center">
+              <FormLabel>Rating:</FormLabel>
+              <Box marginLeft="34px">
+                <ReactStars {...ratingStars} />
+              </Box>
             </FormControl>
             <FormControl display="flex" alignItems="center" marginTop="20px">
               <FormLabel>Coffee:</FormLabel>

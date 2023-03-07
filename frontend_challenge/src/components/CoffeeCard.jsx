@@ -7,19 +7,27 @@ import {
   Divider,
   Box,
   IconButton,
+  Button,
 } from "@chakra-ui/react";
-import { useCoffeeStore } from "../store";
+import { useCoffeeStore, usePostStore } from "../store";
 import mug from "../assets/svgs/mug.svg";
 import whiteMug from "../assets/svgs/whiteMug.svg";
 import { CloseIcon } from "@chakra-ui/icons";
 
 const CoffeeCard = ({ id }) => {
   const { coffeeList, deleteCoffee } = useCoffeeStore();
+  const { isCoffeeSelected, loadCoffeePosts, setIsCoffeeSelected } =
+    usePostStore();
   const { colorMode } = useColorMode();
   const coffee = coffeeList.find((c) => c.id === id);
   const handleDelete = (event) => {
     event.preventDefault();
     deleteCoffee(coffee.id);
+  };
+  const coffeeClickHandler = (event) => {
+    event.preventDefault();
+    loadCoffeePosts(id);
+    setIsCoffeeSelected(true);
   };
   return (
     <Box
@@ -50,15 +58,27 @@ const CoffeeCard = ({ id }) => {
           size="100"
         />
       </Stack>
-      <IconButton
+      <Button
         position="absolute"
         top="5px"
-        right="5px"
-        aria-label="Remove Coffee"
-        icon={<CloseIcon />}
+        right={isCoffeeSelected ? "5px" : "50px"}
+        aria-label="View Coffee Posts"
         visibility="hidden"
-        onClick={handleDelete}
-      />
+        onClick={coffeeClickHandler}
+      >
+        View Posts
+      </Button>
+      {isCoffeeSelected ? null : (
+        <IconButton
+          position="absolute"
+          top="5px"
+          right="5px"
+          aria-label="Remove Coffee"
+          icon={<CloseIcon />}
+          visibility="hidden"
+          onClick={handleDelete}
+        />
+      )}
     </Box>
   );
 };

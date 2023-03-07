@@ -1,11 +1,74 @@
-# App Academy Mock Takehome Challenges
+# BlogCafe
 
-Welcome to a/A's take home challenge, this should be a fun project to put to practice what you've just learned from recap academy.
-There are instructions for each part (front and backend) in their respective folders.
-You are free to use any backend and frontend framework you like for this takehome.
-The requirements listed in each section are by no means a ceiling, please feel free to expand upon anything in the takehome if you have time to do so.
+_BlogCafe_ is a mock assessment submission for https://github.com/ROTBOW/aA_Mock_TakeHomeChallenge
 
-## Submission
-In order to submit your project from this mock takehome you will need to create a new git repo for your project. You will need to write out a readme with clear instructions on how to start your solution locally. After you've finished, fillout the form, in the last section of said form there will be a place to put the link to your solution repo.
+Please run this project locally in development as production build has not been considered.
 
-<a href="https://docs.google.com/forms/d/e/1FAIpQLSfqjYoame7tAiIOmQdC8nkDASqg9tDhEoe-n_DdQxSuw-3QgQ/viewform?usp=sf_link">Submit</a>
+<img src="assets/images/image001.jpg" alt="light mode page" height="300">
+<img src="assets/images/image002.jpg" alt="dark mode page" height="300">
+<img src="assets/images/image003.jpg" alt="dark mode modal" height="300">
+
+## ChallengeReadMe
+
+---
+
+[ChallengeReadMe](ChallengeReadMe.md)
+
+## Technologies Used
+
+---
+
+- Backend: nodeJs, express, sequelize, postgreSQL
+- Frontend: Vite, Chakra UI, React, Zustand
+
+## Getting started
+
+---
+
+1.  Clone this repo.
+
+    -        `https://github.com/suwanshree/aA_mock_takehome`
+
+2.  Install dependencies from the backend_challenge directory.
+
+    -        `npm install`
+
+3.  Install dependencies from the frontend_challenge directory.
+
+    -        `npm install`
+
+4.  Create a POSTGRESQL user with CREATEDB and PASSWORD in PSQL.
+
+    -        CREATE USER <name> WITH CREATEDB PASSWORD <'password'>
+
+5.  Create a .env file in the backend directory based on the .env.example found within the same directory.
+
+6.  Enter your username and password information into your .env file along with your desired database name, a secured combination of characters for your JWT_SECRET, and also add 5000 for your PORT.
+
+7.  Create Database, Migrate, and Seed models.
+
+    -       npx dotenv sequelize db:create
+
+    -       npx dotenv sequelize db:migrate
+
+    -       npx dotenv sequelize db:seed:all
+
+8.  Start the services in the backend_challenge directory.
+
+    -       npm start
+
+9.  Start the services in the frontend_challenge directory, which should open the project in your default browser. If not, navigate to [Frontend Server](http://localhost:5173/).
+
+    -       npm run dev
+
+10. You can use the Demo user or create an account to begin using _Cosmic-Hunt_.
+
+## Features
+
+---
+
+Users can perform the following actions.
+
+    - Add/View/Delete Coffees
+
+    - Add/View/Delete Posts

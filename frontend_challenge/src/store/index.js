@@ -60,6 +60,9 @@ let coffeeStore = (set) => ({
 let postStore = (set) => ({
   postList: [],
   coffeePostList: [],
+  isCoffeeSelected: false,
+  setIsCoffeeSelected: (isCoffeeSelected) =>
+    set((state) => ({ ...state, isCoffeeSelected })),
   loadPosts: async (order = "ASC") => {
     try {
       const res = await axios.get(`http://localhost:5000/post?order=${order}`);
@@ -70,7 +73,7 @@ let postStore = (set) => ({
   },
   loadCoffeePosts: async (id) => {
     try {
-      const res = await axios.get(`http://localhost:5000/post?id=${id}`);
+      const res = await axios.get(`http://localhost:5000/post/coffee?id=${id}`);
       set(() => ({ coffeePostList: res.data }));
     } catch (err) {
       console.error(err);
